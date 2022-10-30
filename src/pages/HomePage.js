@@ -1,51 +1,82 @@
-import { useContext, useCallback, useRef  } from 'react'
+// import { useContext, useCallback, Fragment, useEffect, useState } from 'react'
+import { useContext, Fragment, useRef, useCallback, useEffect} from 'react'
 import { IssueContext } from '../contexts/IssueContextProvider'
 import Container from '../container/Container'
-import Loading from '../components/Loading'
 import IssueCard from '../components/IssueCard/IssueCard'
 import IssueContainer from '../container/IssueContainer'
-// import { getIssue } from '../api/issue'
+import styled from 'styled-components'
+import LoadingIndicator from '../asstes/LoadingIndicator.gif'
+import ErrorSign from '../asstes/ErrorSign.png'
+import Signal from '../components/Signal'
 
 const HomePage = () => {
-const context =  useContext(IssueContext)
-const {loading, data, pageNumber, reachedEnd, fetchIssues} = context
-const observer = useRef()
-const lastRef = useCallback(
-  node => {
-    // if(loading) {
-    //   return <Loading />
-    // }
-    if(observer.current){
-      observer.current.disconnect()
-    }
-    observer.current = new IntersectionObserver(entries => {
-      if(entries[0].isIntersecting && !reachedEnd){
+  const context = useContext(IssueContext)
+  const {isLoading, issueData, isReachEnd, isError, pageNumberHandler} = context
+  const endPoint = useRef(null)
 
-        fetchIssues(pageNumber)
+  const observerHandler = useCallback(
+    (entries, observer) => {
+      if(entries[0].isIntersecting && !isLoading){
+        observer.unobserve(endPoint.current);
+        if(isReachEnd){
+          observer.disconnect();
+          return
+        }
+        pageNumberHandler()
       }
-    })
-    if(node){
-      observer.current.observe(node);
+    }, [isLoading, isReachEnd, pageNumberHandler])
+
+    useEffect(()=>{
+      const option = {
+        threshold: 0,
+      }
+      const observer = new IntersectionObserver(observerHandler, option);
+      if(endPoint.current){
+        observer.observe(endPoint.current)
+      }
+      return () => {
+        observer && observer.disconnect()
+      }},[observerHandler])
+
+    if(isError){
+      return(
+        <Container>
+          <IssueContainer>
+          <Signal status={'에러'} imgSrc={ErrorSign} />
+          </IssueContainer>
+        </Container>
+      )
     }
-  },
-  [pageNumber, reachedEnd, fetchIssues]
-)
-  return(
+  return (
     <Container>
       <IssueContainer>
-      {data?.map((info)=>(
-              <IssueCard number={info.number} title={info.title} user={info.user} url={info.html_url} created_at={info.created_at} comments={info.comments} key={info.id}/>
-      ))}
-      {
-        loading ? (
-        <Loading />
-        ): (
-          <div ref={lastRef}></div>
-        )
-      }
+        {issueData?.map((info, index) => (
+          <Fragment key={index}>
+            {index === 4 &&
+              <AdWrapper href='https://www.wanted.co.kr'>
+                <img src='https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100' alt='광고' />
+              </AdWrapper>
+            }
+            <IssueCard number={info.number} title={info.title} user={info.user} url={info.html_url} created_at={info.created_at} comments={info.comments} key={info.id} />
+          </Fragment>
+        ))}
+        <div ref={endPoint}></div>
+        {isLoading && 
+        <Signal status={'로딩 중'} imgSrc={LoadingIndicator} />}
       </IssueContainer>
     </Container>
   )
 }
+
+const AdWrapper = styled.a`
+  display:flex;
+  padding: 2%;
+  margin-bottom: 1%;
+  background-color: var(--color-white);
+  border-radius: 1rem;
+  img{
+  }
+`
+
 
 export default HomePage

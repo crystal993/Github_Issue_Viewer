@@ -1,41 +1,42 @@
-import { createContext, useEffect, useReducer } from "react";
-import { getIssue } from "../api/issue";
-import { reducer } from "./reducer";
-export const IssueContext = createContext({})
+import { createContext, useCallback, useState } from 'react';
+import {getIssue} from '../api/issue'
 
-const initialState = {
-  loading: false,
-  data : [],
-  pageNumber : 1,
-  error : null,
-  reachedEnd: false
-}
+export const IssueContext = createContext(null)
 
 
-const IssueContextProvider = ({children}) => {
-  // const [date, setDate] = useState('')
-  const [state, dispatch] = useReducer(reducer, initialState)
-  const fetchIssues = async(initialState) => {
-    dispatch({type:'LOADING'})
+export const IssueContextProvider = ({children}) => {
+  const [pageNumber, setPageNumber] = useState(0)
+  const [isLoading, setIsLoading ] = useState(false)
+  const [issueData, setIssueData] = useState([])
+  const [isReachEnd, setIsReachEnd] = useState(false)
+  const [isError, setIsError] = useState(false)
+
+  const pageNumberHandler = ()=>{
+    if(!isReachEnd){
+      fetchIssues(pageNumber)
+      setPageNumber((prev)=>prev+1)
+    }
+  }
+  const fetchIssues = useCallback(async(pageNumber) => {
     try{
-      const response = await getIssue(initialState)
-      if(response.length>0){
-        dispatch({type:'SUCCESS', data: response})
-      }else{
-        dispatch({type:'REACH_END', data: response})
+      setIsLoading(true)
+      const response   = await getIssue(pageNumber)
+      if(response.length === 0){
+        setIsReachEnd(true)
       }
-    } catch(error) {
-      dispatch({type:'ERROR', error})
-  }
-  }
-  
-  useEffect(()=>{
-    fetchIssues(initialState.pageNumber)
-  }, [])
-  const { loading, data, pageNumber,error, reachedEnd } = state;
-  return(
-    <IssueContext.Provider value={{loading, data,pageNumber, error, reachedEnd, fetchIssues }}>{children}</IssueContext.Provider>
-  )
-}
+      setIssueData((prev)=>[...prev, ...response])
+    }catch(error){
+      setIsError(true)
+    } finally{
+      setIsLoading(false)
+    }
+  },[])
 
+  return(
+    <IssueContext.Provider value={{isLoading, issueData, isReachEnd, isError, fetchIssues, pageNumberHandler }}>
+      {children}
+      </IssueContext.Provider>
+  )
+
+}
 export default IssueContextProvider
