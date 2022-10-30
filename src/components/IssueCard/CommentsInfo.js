@@ -10,5 +10,9 @@ const CommentsInfo = ({commentsLength}) => {
 
 const CommentWrapper = styled.div`
   margin-left: auto;
+  min-width :10rem;
+  @media screen and (max-width: 413px) {
+    min-width :5rem;
+    }
 `
 export default CommentsInfo

@@ -21,7 +21,10 @@ export const GlobalStyles = createGlobalStyle`
     background-color:var(--color-vaseline);
   }
   body {
-    font-size: 1.5rem;
     font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    @media screen and (max-width: 413px) {
+      font-size: 1rem;
+    }
   }
 `;
