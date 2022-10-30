@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   :root{
     --color-blue :#0050FF;
-    --color-yellow:#FEDD89;
+    --color-vaseline:#ebe7bf;
     --color-mauve: #dee3f9;
     --color-orange: #FF6C02;
     --color-black : #000000;
@@ -17,7 +17,8 @@ export const GlobalStyles = createGlobalStyle`
   html {
     font-size: 62.5%;
     box-sizing: border-box;
-    color: rgb(51, 51, 51);
+    color: var(--color-white);
+    background-color:var(--color-vaseline);
   }
   body {
     font-family: 'Oswald', sans-serif;

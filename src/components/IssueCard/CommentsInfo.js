@@ -1,9 +1,14 @@
+import styled from "styled-components"
+
 const CommentsInfo = ({commentsLength}) => {
   return(
-    <div>
+    <CommentWrapper>
       <div>코멘트 : {commentsLength}</div>
-    </div>
+    </CommentWrapper>
   )
 }
 
+const CommentWrapper = styled.div`
+  margin-left: auto;
+`
 export default CommentsInfo

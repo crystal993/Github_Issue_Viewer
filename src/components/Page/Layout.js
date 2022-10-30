@@ -10,9 +10,8 @@ const Layout = ({children}) => {
 
 const VerticalWrapper = styled.div`
   display: flex;
-  text-align:center;
   flex-direction: column;
-  border: 1px solid red;
+  padding: 2%;
 `
 
 export default Layout

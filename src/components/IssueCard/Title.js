@@ -14,6 +14,7 @@ const TitleWrapper = styled.a`
   text-align:center;
   text-decoration: none;
   color: inherit;
+  margin-bottom: 5%;
   .number{
     margin-right: 1rem;
   }

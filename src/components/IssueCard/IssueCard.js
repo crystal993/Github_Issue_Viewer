@@ -8,10 +8,10 @@ const IssueCard = ({ number, title, user, html_url, created_at, comments }) => {
   const convertedDate = isoToTimeStamp(created_at)
   return (
     <HoriziontalWrapper>
-      <div>
+      <TopWrapper>
         <Title number={number} title={title} url={html_url} />
         <IssueInfo user={user} createdAt={convertedDate} />
-      </div>
+      </TopWrapper>
       <CommentsInfo commentsLength={comments} />
     </HoriziontalWrapper>
   )
@@ -19,9 +19,13 @@ const IssueCard = ({ number, title, user, html_url, created_at, comments }) => {
 
 const HoriziontalWrapper = styled.div`
   display:flex;
-  text-align:start;
-  margin: 1%;
-  border: 1px solid blue;
+  margin-bottom: 1%;
+  background-color:#231A4C;
+  padding: 2%;
+  border-radius: 1rem;
+`
+const TopWrapper = styled.section`
+  left:100%;
 `
 
 export default IssueCard
