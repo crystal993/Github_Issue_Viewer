@@ -5,8 +5,8 @@ export const IssueContext = createContext({})
 
 const initialState = {
   loading: false,
+  data : [],
   error : null,
-  data : []
 }
 
 const IssueContextProvider = ({children}) => {

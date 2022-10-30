@@ -3,8 +3,8 @@ export const reducer = (state, action) => {
     case "LOADING" : {
       return{
         loading: true,
-        error: null,
         data :null,
+        error: null,
       }
     }
     case "SUCCESS" : {
