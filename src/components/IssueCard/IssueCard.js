@@ -25,7 +25,7 @@ const HoriziontalWrapper = styled.div`
   border-radius: 1rem;
 `
 const TopWrapper = styled.section`
-  left:100%;
+  width:100%;
 `
 
 export default IssueCard

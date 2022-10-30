@@ -17,10 +17,12 @@ const InfoWrapper = styled.section`
     width:2rem;
     height:2rem;
     border-radius: 50%;
+    margin-right: 0.5rem;
   }
   a{
     text-decoration: none;
     color: inherit;
+    margin-right: 0.5rem;
   }
 `
 

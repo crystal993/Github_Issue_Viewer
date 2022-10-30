@@ -39,6 +39,7 @@ const MarkDownWrapper = styled.section`
   border-radius: 1rem;
   color:var(--color-black);
   background-color:var(--color-white);
+  line-height: normal;
 `
 
 export default IssuDetail
