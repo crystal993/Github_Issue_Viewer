@@ -1,0 +1,1 @@
+export const auth = window.btoa(process.env.REACT_APP_TOKEN)
