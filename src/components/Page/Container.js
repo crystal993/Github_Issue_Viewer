@@ -1,5 +1,5 @@
-import Layout from "../components/Page/Layout"
-import Header from "../components/Page/Header"
+import Layout from "./Layout"
+import Header from "./Header"
 
 const Container = ({children}) => {
   const title = 'Angular / Angular-cli'
