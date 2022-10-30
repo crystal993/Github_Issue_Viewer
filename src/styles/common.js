@@ -53,7 +53,7 @@ export const ArticleIssue = css`
   justify-content: space-between;
   align-items: center;
   ${ArticleCommon}
-  
+
   div.contents {
     width: 80%;
     div {

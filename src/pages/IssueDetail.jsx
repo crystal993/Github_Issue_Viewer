@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import LoadingSpinner from '../components/LoadingSpinner';
 import DetailItem from '../components/issueDetail/DetailItem';
 import ErrorRenderer from '../components/issueDetail/ErrorRenderer';
-import {  useIssueContext } from '../contexts/IssueProvider';
+import { useIssueContext } from '../contexts/IssueProvider';
 import { useRepoContext } from '../contexts/RepoProvider';
 
 const DetailsPage = () => {
@@ -16,7 +16,7 @@ const DetailsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const { ownerRepo } = useRepoContext();
-  
+
   const getIssueData = async () => {
     try {
       const response = await IssuesService.getIssue(id, ownerRepo);
@@ -32,8 +32,7 @@ const DetailsPage = () => {
   useEffect(() => {
     if (!Object.keys(issueDetail).length) {
       getIssueData();
-    }
-    else {
+    } else {
       setIsLoading(false);
     }
   }, []);
@@ -41,16 +40,7 @@ const DetailsPage = () => {
   return (
     <>
       <Header />
-      <Main>
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : 
-          isError ? (
-            <ErrorRenderer />
-          ) : (
-            <DetailItem />
-          )}
-      </Main>
+      <Main>{isLoading ? <LoadingSpinner /> : isError ? <ErrorRenderer /> : <DetailItem />}</Main>
     </>
   );
 };

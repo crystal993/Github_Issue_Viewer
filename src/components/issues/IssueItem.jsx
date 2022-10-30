@@ -16,17 +16,19 @@ const IssueItem = ({ issue }) => {
 
   return (
     <Article onClick={onIssueClick}>
-      <div className='contents'>
+      <div className="contents">
         <div className="title">
           <p>
             #{issue.number} {issue.title}
           </p>
         </div>
         <div className="info">
-          <p>작성자: <span>{issue.user.login}</span>, 작성일: {create_date}</p>
+          <p>
+            작성자: <span>{issue.user.login}</span>, 작성일: {create_date}
+          </p>
         </div>
       </div>
-      <div className='comment'>
+      <div className="comment">
         <span>코멘트: {issue.comments}</span>
       </div>
     </Article>

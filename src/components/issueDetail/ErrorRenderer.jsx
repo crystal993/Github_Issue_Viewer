@@ -1,14 +1,11 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import errorImage from '../../assets/404.png';
 import errorImage_mobile from '../../assets/404_mobile.png';
 
-
 const ErrorRenderer = () => {
-  return (
-    <DivNotfound />
-  )
-}
+  return <DivNotfound />;
+};
 
 const DivNotfound = styled.div`
   height: 20em;

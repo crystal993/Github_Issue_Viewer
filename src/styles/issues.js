@@ -5,7 +5,7 @@ export const Main = styled.main`
   width: 60%;
   height: 100%;
   margin: 0 auto;
-  
+
   @media (max-width: 720px) {
     width: 100%;
   }
@@ -28,4 +28,4 @@ export const DivAvatar = styled.div`
     height: 90%;
     border-radius: 50%;
   }
-`
+`;

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw'
+import rehypeRaw from 'rehype-raw';
 import styled from 'styled-components';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
@@ -30,7 +30,7 @@ const MarkdownRenderer = () => {
           return {};
         }
       };
-      
+
       return match ? (
         <SyntaxHighlighter
           style={syntaxTheme}
@@ -54,7 +54,11 @@ const MarkdownRenderer = () => {
   const { issueDetail } = useIssueContext();
   return (
     <DivMarkdown>
-      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={MarkdownComponents}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
+        components={MarkdownComponents}
+      >
         {issueDetail.body}
       </ReactMarkdown>
     </DivMarkdown>
@@ -90,7 +94,7 @@ const DivMarkdown = styled.div`
     background-color: #d3d6d9;
     padding: 1rem;
     overflow: auto;
-  
+
     @media (max-width: 720px) {
       padding: 0.5rem;
     }

@@ -12,7 +12,7 @@ const useAxios = () => {
       setIsLoading(true);
       // console.log('get issue');
       const response = await IssuesService.getIssueList(page, ownerRepo);
-      setIssueList({list: response.data, hasMore: response.data.length > 0, isLoading: false})
+      setIssueList({ list: response.data, hasMore: response.data.length > 0, isLoading: false });
     } catch (err) {
       setIsLoading(false);
     }

@@ -21,11 +21,9 @@ const RepoContext = createContext({
   setOwnerRepo: () => {},
 });
 
-
 export const useRepoContext = () => {
   return useContext(RepoContext);
 };
-
 
 function RepoProvider({ children }) {
   const [state, dispatch] = useReducer(repoReducer, initialStates);
