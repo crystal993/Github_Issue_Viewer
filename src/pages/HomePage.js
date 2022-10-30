@@ -18,7 +18,7 @@ else if(error){
   return(
     <Container>
       <div>TestCICD</div>
-      {data?.map((info)=>(
+      {data.map((info)=>(
               <IssueCard number={info.number} title={info.title} user={info.user} url={info.html_url} created_at={info.created_at} comments={info.comments} key={info.number}/>
       ))}
     </Container>
