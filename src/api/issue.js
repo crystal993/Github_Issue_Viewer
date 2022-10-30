@@ -6,6 +6,6 @@ export const getIssue = async (pageNumber) => {
 }
 
 export const getOneIssue = async (issueNumber) => {
-  const { data } = await axiosInstance.get(`/repos/angular/angular-cli/${issueNumber}`)
+  const { data } = await axiosInstance.get(`/repos/angular/angular-cli/issues/${issueNumber}`)
   return data
 }
