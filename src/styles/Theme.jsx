@@ -5,10 +5,10 @@ export const Theme = {
   whiteColor: '#FFFFFF',
 
   // main
-  mainColor: '#5D5FEF',
+  mainColor: '#5e5d5d',
 
   // sub
-  subColor: '#7EA2FF',
+  subColor: '#2c2d2d',
 
   //header
   headerMainColor: '#ffffff',
