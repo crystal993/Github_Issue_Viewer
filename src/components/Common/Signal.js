@@ -16,6 +16,9 @@ const SignalWrapper = styled.section`
   align-items:center;
   font-weight: bold;
   font-size: 2rem;
+  @media screen and (max-width: 413px) {
+      font-size: 1rem;
+    }
 `
 const IMG = styled.img`
   width: 5rem;

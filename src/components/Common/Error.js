@@ -1,5 +1,5 @@
-import Container from "../container/Container"
-import IssueContainer from "../container/IssueContainer"
+import Container from "../../container/Container"
+import IssueContainer from "../../container/IssueContainer"
 
 const Error = ({children}) => {
   return (
