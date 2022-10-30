@@ -3,10 +3,10 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw'
 import styled from 'styled-components';
-import { useIssueContext } from '../../contexts/IssueContext';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/cjs/languages/prism/jsx';
 import { oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { useIssueContext } from '../../contexts/IssueProvider';
 
 SyntaxHighlighter.registerLanguage('jsx', jsx);
 

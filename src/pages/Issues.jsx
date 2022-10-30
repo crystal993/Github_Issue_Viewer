@@ -1,15 +1,17 @@
 import React, { useCallback, useRef } from 'react';
 import styled from 'styled-components';
-import { useIssueContext } from '../contexts/IssueContext';
 import useAxios from '../hooks/useAxios';
 import { Main } from '../styles/issues';
 import Header from '../components/Header';
 import AdvertItem from '../components/issues/AdvertItem';
 import IssueItem from '../components/issues/IssueItem';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { useIssueContext } from '../contexts/IssueProvider';
+// import { RepoContext } from '../contexts/RepoContext';
 
 const IssuesPage = () => {
-  const { issueList, setPageNum, isLoading, hasMore } = useIssueContext();
+  const { issueList, isLoading, hasMore, page, setPage } = useIssueContext();
+
   useAxios();
 
   const observer = useRef();
@@ -23,7 +25,7 @@ const IssuesPage = () => {
       }
       observer.current = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting && hasMore) {
-          setPageNum(prev => prev + 1);
+          setPage(page + 1);
         }
       });
       if (node) {

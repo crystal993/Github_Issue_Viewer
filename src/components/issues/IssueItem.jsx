@@ -1,8 +1,8 @@
 import React from 'react';
 import { convertDate } from '../../utils/convertDate';
 import { useNavigate } from 'react-router-dom';
-import { useIssueContext } from '../../contexts/IssueContext';
 import { Article } from '../../styles/issues';
+import { useIssueContext } from '../../contexts/IssueProvider';
 
 const IssueItem = ({ issue }) => {
   const navigate = useNavigate();

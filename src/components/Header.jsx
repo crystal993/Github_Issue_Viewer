@@ -2,16 +2,36 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as LogoIcon } from '../assets/logo.svg';
+import { useRepoContext } from '../contexts/RepoProvider';
 
 const Header = () => {
+  const { ownerRepo } = useRepoContext();
+  // const { ownerRepo, setOwnerRepo } = useRepoContext();
+  // const owner = useRef();
+  // const repo = useRef();
+
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   if(owner.current.value && repo.current.value) {
+  //     setOwnerRepo({owner: owner.current.value, repo: repo.current.value});
+  //   } else {
+  //     alert("빈칸을 채워주세요.");
+  //   }
+  // }
+
   return (
     <HeaderStyle>
       <h1>
         <Link to="/">
           <LogoIcon width={30} height={30} />
         </Link>
-        Angular / Angular-cli
+        {ownerRepo.owner} / {ownerRepo.repo}
       </h1>
+      {/* <form onSubmit={onSubmit}>
+        <input type="text" name="owner" ref={owner} />
+        <input type="text" name="repo" ref={repo} />
+        <button>이동</button>
+      </form> */}
     </HeaderStyle>
   );
 };
