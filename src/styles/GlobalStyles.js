@@ -21,6 +21,7 @@ export const GlobalStyles = createGlobalStyle`
     background-color:var(--color-vaseline);
   }
   body {
+    font-size: 1.5rem;
     font-family: 'Oswald', sans-serif;
   }
 `;

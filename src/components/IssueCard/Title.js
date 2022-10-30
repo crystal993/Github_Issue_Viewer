@@ -10,7 +10,6 @@ const Title = ({ number, title, url }) => {
 }
 const TitleWrapper = styled.a`
   display:flex;
-  justify-content:center;
   text-align:center;
   text-decoration: none;
   color: inherit;
