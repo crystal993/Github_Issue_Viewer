@@ -7,7 +7,6 @@ import AdvertItem from '../components/issues/AdvertItem';
 import IssueItem from '../components/issues/IssueItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useIssueContext } from '../contexts/IssueProvider';
-// import { RepoContext } from '../contexts/RepoContext';
 
 const IssuesPage = () => {
   const { issueList, isLoading, hasMore, page, setPage } = useIssueContext();

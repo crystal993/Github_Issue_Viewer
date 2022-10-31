@@ -10,19 +10,12 @@ const useAxios = () => {
   const getIssues = useCallback(async () => {
     try {
       setIsLoading(true);
-      // console.log('get issue');
       const response = await IssuesService.getIssueList(page, ownerRepo);
       setIssueList({ list: response.data, hasMore: response.data.length > 0, isLoading: false });
     } catch (err) {
       setIsLoading(false);
     }
   }, [page]);
-
-  // useEffect(() => {
-  //   console.log('change owner');
-  //   setIssueList({list: [], hasMore: false, isLoading: false});
-  //   setPage(1);
-  // }, [ownerRepo]);
 
   useEffect(() => {
     getIssues();
