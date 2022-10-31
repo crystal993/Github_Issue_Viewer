@@ -87,7 +87,10 @@ wanted_assignment_02
 
 [✨ 선정 기준 #2](https://github.com/Wanted-07-team-9/wanted_assignment_02/discussions/2)
 
-[✨ 선정 이유](https://github.com/Wanted-07-team-9/wanted_assignment_02/discussions/9)
+[✨ 선정 이유 #1](https://github.com/Wanted-07-team-9/wanted_assignment_02/discussions/9)  
+
+[✨ 선정 이유 #2](https://github.com/Wanted-07-team-9/wanted_assignment_02/pull/29)
+
 
 ## 작업한 내용
 
