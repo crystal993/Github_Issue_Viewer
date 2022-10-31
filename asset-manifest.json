@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/wanted_assignment_02/static/js/main.7b9df111.js",
+    "main.js": "/wanted_assignment_02/static/js/main.ed1d029c.js",
     "static/media/404.png": "/wanted_assignment_02/static/media/404.d560692bf21754f70d0b.png",
     "static/media/404_mobile.png": "/wanted_assignment_02/static/media/404_mobile.a0cdbe4df4c4ad398d47.png",
     "static/media/logo.svg": "/wanted_assignment_02/static/media/logo.255db585f8a0eb28a1e4deb91bde207d.svg",
     "index.html": "/wanted_assignment_02/index.html",
-    "main.7b9df111.js.map": "/wanted_assignment_02/static/js/main.7b9df111.js.map"
+    "main.ed1d029c.js.map": "/wanted_assignment_02/static/js/main.ed1d029c.js.map"
   },
   "entrypoints": [
-    "static/js/main.7b9df111.js"
+    "static/js/main.ed1d029c.js"
   ]
 }
