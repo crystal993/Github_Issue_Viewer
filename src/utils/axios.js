@@ -7,8 +7,6 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
-    const token = process.env.REACT_APP_GITHUB_TOKEN;
-    config.headers.Authorization = `token ${token}`;
     config.headers.accept = 'application/vnd.github+json';
     return config;
   },

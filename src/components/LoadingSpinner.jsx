@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-// import { useIssueContext } from '../contexts/IssueContext';
 
 const LoadingSpinner = () => {
   return (

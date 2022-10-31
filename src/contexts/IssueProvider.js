@@ -6,6 +6,7 @@ const initialStates = {
   hasMore: false,
   page: 1,
   issueDetail: {},
+  isError: false
 };
 
 const issueReducer = (state, action) => {
@@ -16,16 +17,9 @@ const issueReducer = (state, action) => {
         issueList: [...state.issueList, ...action.list],
         hasMore: action.hasMore,
         isLoading: action.isLoading,
+        isError: action.isError,
       };
     }
-    // case 'INIT_ISSUE_LIST': {
-    //   return {
-    //     ...state,
-    //     issueList: action.list,
-    //     hasMore: action.hasMore,
-    //     isLoading: action.isLoading,
-    //   };
-    // }
     case 'SET_PAGE': {
       return {
         ...state,
@@ -44,6 +38,12 @@ const issueReducer = (state, action) => {
         issueDetail: action.issue,
       };
     }
+    case 'SET_ISSUE_LIST_ERROR': {
+      return {
+        ...state,
+        isError: action.isError,
+      };
+    }
     default: {
       throw Error('Unknown action: ' + action.type);
     }
@@ -53,10 +53,10 @@ const issueReducer = (state, action) => {
 const IssueContext = createContext({
   issues: initialStates,
   setIssueList: () => {},
-  // setInitIssueList: () => {},
   setPage: () => {},
   setIsLoading: () => {},
   setIssueDetail: () => {},
+  setIsError: () => {},
 });
 
 export const useIssueContext = () => {
@@ -65,12 +65,9 @@ export const useIssueContext = () => {
 
 function IssueProvider({ children }) {
   const [state, dispatch] = useReducer(issueReducer, initialStates);
-  const setIssueList = ({ list, hasMore, isLoading }) => {
-    dispatch({ type: 'SET_ISSUE_LIST', list, hasMore, isLoading });
+  const setIssueList = ({ list, hasMore, isLoading, isError }) => {
+    dispatch({ type: 'SET_ISSUE_LIST', list, hasMore, isLoading, isError });
   };
-  // const setInitIssueList = (list) => {
-  //   dispatch({ type: 'INIT_ISSUE_LIST', list });
-  // };
   const setPage = page => {
     dispatch({ type: 'SET_PAGE', page });
   };
@@ -80,6 +77,9 @@ function IssueProvider({ children }) {
   const setIssueDetail = issue => {
     dispatch({ type: 'SET_ISSUE_DETAIL', issue });
   };
+  const setIsError = isError => {
+    dispatch({ type: 'SET_ISSUE_LIST_ERROR', isError });
+  };
 
   return (
     <IssueContext.Provider
@@ -87,13 +87,14 @@ function IssueProvider({ children }) {
         issueList: state.issueList,
         hasMore: state.hasMore,
         isLoading: state.isLoading,
+        isError: state.isError,
         page: state.page,
         issueDetail: state.issueDetail,
         setIssueList,
-        // setInitIssueList,
         setIsLoading,
         setPage,
         setIssueDetail,
+        setIsError,
       }}
     >
       {children}

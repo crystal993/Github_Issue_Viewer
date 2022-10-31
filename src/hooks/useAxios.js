@@ -5,15 +5,16 @@ import { useRepoContext } from '../contexts/RepoProvider';
 
 const useAxios = () => {
   const { ownerRepo } = useRepoContext();
-  const { page, setIssueList, setIsLoading } = useIssueContext();
+  const { page, setIssueList, setIsLoading, setIsError } = useIssueContext();
 
   const getIssues = useCallback(async () => {
     try {
       setIsLoading(true);
       const response = await IssuesService.getIssueList(page, ownerRepo);
-      setIssueList({ list: response.data, hasMore: response.data.length > 0, isLoading: false });
+      setIssueList({ list: response.data, hasMore: response.data.length > 0, isLoading: false, isError: false });
     } catch (err) {
       setIsLoading(false);
+      setIsError(true);
     }
   }, [page]);
 

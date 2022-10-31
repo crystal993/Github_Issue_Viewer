@@ -7,9 +7,10 @@ import AdvertItem from '../components/issues/AdvertItem';
 import IssueItem from '../components/issues/IssueItem';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useIssueContext } from '../contexts/IssueProvider';
+import ErrorRenderer from '../components/issueDetail/ErrorRenderer';
 
 const IssuesPage = () => {
-  const { issueList, isLoading, hasMore, page, setPage } = useIssueContext();
+  const { issueList, isLoading, hasMore, page, isError, setPage } = useIssueContext();
 
   useAxios();
 
@@ -33,22 +34,27 @@ const IssuesPage = () => {
     },
     [isLoading, hasMore]
   );
-
   return (
     <>
       <Header />
-      <Main>
-        <Section>
-          {issueList.map((issue, index) => (
-            <div key={index}>
-              {index === 4 && <AdvertItem />}
-              <IssueItem key={index} issue={issue} />
-            </div>
-          ))}
-        </Section>
-      </Main>
-      {isLoading && <LoadingSpinner />}
-      <div ref={lastRef}></div>
+      {isError ? (
+        <ErrorRenderer />
+      ) : (
+        <>
+          <Main>
+            <Section>
+              {issueList.map((issue, index) => (
+                <div key={index}>
+                  {index === 4 && <AdvertItem />}
+                  <IssueItem key={index} issue={issue} />
+                </div>
+              ))}
+            </Section>
+          </Main>
+          {isLoading && <LoadingSpinner />}
+          <div ref={lastRef}></div>
+        </>
+      )}
     </>
   );
 };

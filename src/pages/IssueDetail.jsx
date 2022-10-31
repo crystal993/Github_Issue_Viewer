@@ -23,7 +23,6 @@ const DetailsPage = () => {
       setIssueDetail(response.data);
       setIsLoading(false);
     } catch (e) {
-      console.log(e);
       setIsLoading(false);
       setIsError(true);
     }
