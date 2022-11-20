@@ -1,27 +1,18 @@
-import { GlobalStyles } from './styles/common';
+import GlobalStyle from './styles/GlobalStyle';
+import { Reset } from 'styled-reset';
 import Router from './router/Router';
-import { createElement } from 'react';
-import RepoProvider from './contexts/RepoProvider';
-import IssueProvider from './contexts/IssueProvider';
-
-const App = () => {
-  const AppProvider = ({ context, children }) =>
-    context.reduce(
-      (prev, context) =>
-        createElement(context, {
-          children: prev,
-        }),
-      children
-    );
-
+import { IssuesProvider } from './context/IssuesContext';
+import { MarkdownProvider } from './context/MarkdownContext';
+function App() {
   return (
-    <>
-      <AppProvider context={[RepoProvider, IssueProvider]}>
-        <GlobalStyles />
+    <IssuesProvider>
+      <MarkdownProvider>
+        <Reset />
+        <GlobalStyle />
         <Router />
-      </AppProvider>
-    </>
+      </MarkdownProvider>
+    </IssuesProvider>
   );
-};
+}
 
 export default App;

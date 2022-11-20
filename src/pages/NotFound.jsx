@@ -1,20 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
-import ErrorRenderer from '../components/issueDetail/ErrorRenderer';
+import error_page_img from '../assets/error_page_img.png';
 
-const NotFoundPage = () => {
+const NotFound = () => {
   return (
-    <>
-      <ErrorHeader>Error 404 Not Found</ErrorHeader>
-      <ErrorRenderer />
-    </>
+    <Wrapper>
+      <ErrorImg src={error_page_img}></ErrorImg>
+    </Wrapper>
   );
 };
 
-const ErrorHeader = styled.header`
-  text-align: center;
-  font-size: 2em;
-  margin: 2em 0;
+const Wrapper = styled.div`
+  margin: 0 auto;
 `;
 
-export default NotFoundPage;
+const ErrorImg = styled.img`
+  height: 20rem;
+  width: 100%;
+  @media (min-width: 1280px) {
+    /* Desktop */
+    width: 40rem;
+  }
+  @media (min-width: 768px) and (max-width: 1280px) {
+    /* Tablet */
+    height: 30rem;
+  }
+`;
+
+export default NotFound;
+
