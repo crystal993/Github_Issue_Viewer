@@ -120,230 +120,138 @@ open http://localhost:3000
 </details>
 
 
-## 작업한 내용
+<br>
+<br>
+
+## 💻 작업한 내용
 
 ## Assignment1. 이슈 목록 및 상세 화면 기능 구현
 <hr>
 
-### 1-1. 이슈 목록 페이지
-- 이슈 목록 가져오기 API 활용 
-  ![image](https://user-images.githubusercontent.com/72599761/198877285-214e5318-2fe5-475f-8938-8ef6c97164e3.png)
+## 1-1. 이슈 목록 페이지
 
-```javascript
-get_issues: page =>
-    instance.get(
-      `/repos/angular/angular-cli/issues?state=open&sort=comments&per_page=${page}&page=5`
-    ),
-```
+### 1-1-1. 이슈 목록 가져오기 API 활용 
+  ![image](https://user-images.githubusercontent.com/72599761/198877285-214e5318-2fe5-475f-8938-8ef6c97164e3.png)
 
 - 요청 파라미터로 이슈 상태가 open이고, 코멘트가 많은 순으로 정렬했습니다. 
 
-```javascript
-{issues &&
-          issues.map((issue, idx) => {
-            if (idx + 1 !== 5) {
-              return <>{issue && <Issue issue={issue} key={issue.id} />}</>;
-            } else {
-              return (
-                <>
-                  {
-                    <AdImg
-                      src={
-                        'https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100'
-                      }
-                      onClick={() =>
-                        navigate('/redirect', { state: { url: 'https://www.wanted.co.kr/ ' } })
-                      }
-                    />
-                  }
-                </>
-              );
-            }
-```
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/api/api.js#L4-L7
 
-- 다섯번째 셀에 광고 이미지를 출력했습니다. 
+<br>
+<hr>
+<br>
 
-```javascript
-import { useLocation } from 'react-router-dom';
 
-const Redirect = () => {
-  const location = useLocation();
-  const { url } = location.state;
-  if (url) window.location.href = url;
+### 1-1-2. 다섯번째 셀에 광고 이미지를 출력 
+- 조건문을 이용하여 인덱스가 5가 아닐 때는 이슈를 출력하고, 인덱스가 5일 때는 다섯번째 셀에 광고 이미지를 출력했습니다. 
 
-  return null;
-};
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/components/main/IssueList.jsx#L46-L67
 
-export default Redirect;
+<br>
+<hr>
+<br>
 
-```
+### 1-1-3. 광고 누르면 Wanted 페이지로 이동하기 
 - Redirect 컴포넌트를 만들어 따로 관리했습니다. 
 
-- ⭐ Infinite Scroll 구현 
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/router/Redirect.jsx#L1-L11
 
+<br>
+<hr>
+<br>
 
-### 1-2. 상세 페이지
+### 1-1-4. ⭐ Infinite Scroll 구현 
+- 메인 페이지에서 이슈 리스트를 페이지마다 10개씩 이슈들을 받아오도록 했습니다. 
+- 무한스크롤을 구현할 때 Intersection Observer로 구현했습니다. 
+- 받아온 데이터들을 context API로 전역으로 관리하여 사용했습니다. 
+
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/components/main/IssueList.jsx#L13-L39
+
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/context/IssuesContext.js#L50-L60
+
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/api/api.js#L4-L7
+
+<br>
+<hr>
+<br>
+
+## Assignment2. 상세 페이지
 
 ![image](https://user-images.githubusercontent.com/72599761/198877931-6b5a26f9-77eb-43db-9cd1-175eb26e766e.png)
 
-```javascript
-get_an_issue: issue_number => {
-    return instance.get(`/repos/angular/angular-cli/issues/${issue_number}`);
-  }
-```
+### 1-2-1. 상세 페이지 이슈 가져오기 API
+
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/api/api.js#L8-L10
+
 - 이슈 번호를 파라미터로 받아서 해당 이슈에 대한 데이터를 요청합니다. 
 
-```javascript
-post_render_markdown: text => {
-    const body = { text: text };
-    return instance.post('/markdown', body);
-  }
-```
+<br>
+<hr>
+<br>
+
+### 1-2-2. 상세 페이지 마크다운 변환하기 
+
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/api/api.js#L11-L14
 
 - 마크다운 변환할 때, 깃허브 API에 있는 마크다운 변환 API를 사용했습니다. 
 
-```javascript
-const IssueBody = ({ body }) => {
-  const state = useIssuesState();
-  const dispatch = useIssuesDispatch();
-  const { data: bodyTxt, loading, error } = state.bodyTxt;
-  const txtElement = parse(String(bodyTxt));
-  useEffect(() => {
-    postRenderMarkdown(dispatch, body);
-    return () => {};
-  }, []);
-  else if (bodyTxt) return <Wrapper>{txtElement}</Wrapper>;
-};
-```
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/components/detail/IssueBody.jsx#L10-L23
+
 - 마크다운 API 또한 context에서 관리하였습니다. 
 
+<br>
+<hr>
+<br>
 
-### 3. 공통 헤더 
+## Assignment3. 공통 헤더 
 - 두 페이지는 공통 헤더를 공유합니다.
 - 헤더에는 Organization Name / Repository Name이 표시됩니다.
 - 레이아웃 컴포넌트에서 헤더를 사용해서 중첩 라우터로 두 페이지에 해당하는 컴포넌트를 감싸서 전부 공통 헤더를 가지게 됩니다. 
 
-```javascript
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/components/elements/Header.jsx#L1-L15
 
-const Header = ({ organName, repoName }) => {
-  return (
-    <Wrapper>
-      <Title to="/">
-        <h1>
-          {organName} / {repoName}
-        </h1>
-      </Title>
-    </Wrapper>
-  );
-};
-``` 
 
-## Assignment2. Context API를 활용한 API 연동
-전체적으로 Reducer를 활용하여 진행하였습니다.
 
-```javascript
-//state.js
-export const loadingState = {
-  loading: true,
-  data: null,
-  error: null,
-};
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/components/elements/Layout.jsx#L5-L14
 
-export const success = data => ({
-  loading: false,
-  data: data,
-  error: null,
-});
+- 헤더에는 Organization Name / Repository Name이 표시됩니다.
 
-export const errors = error => ({
-  loading: false,
-  data: null,
-  error: error,
-});
-```
-state 상태값에 따라 상태값을 관리해줍니다. 
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/components/elements/Layout.jsx#L5-L14
 
-```javascript
-// reducer
-function issuesReducer(state, action) {
-  switch (action.type) {
-    case 'GET_ISSUES':
-      return {
-        ...state,
-        issues: loadingState,
-      };
-    case 'GET_ISSUES_SUCCESS':
-      return {
-        ...state,
-        issues: success(action.data),
-      };
-    case 'GET_ISSUES_ERROR':
-      return {
-        ...state,
-        issues: errors(action.error),
-      };
-    case 'GET_ISSUE':
-      return {
-        ...state,
-        issue: loadingState,
-      };
-    case 'GET_ISSUE_SUCCESS':
-      return {
-        ...state,
-        issue: success(action.data),
-      };
-    case 'GET_ISSUE_ERROR':
-      return {
-        ...state,
-        issue: errors(action.error),
-      };
-    case 'INIT':
-      return [...action.initIssue];
-    case 'ADD':
-      return [...state, ...action.initIssue];
-    default:
-      throw new Error(`Unhanded action type: ${action.type}`);
-  }
-}
-```
+- 레이아웃 컴포넌트에서 헤더를 사용해서 중첩 라우터로 두 페이지에 해당하는 컴포넌트를 감싸서 전부 공통 헤더를 가지게 됩니다. 
 
-```javascript
-// state와 dispatch에 관한 context를 생성했습니다. 
-const IssuesStateContext = createContext(null);
-const IssuesDispatchContext = createContext(null);
+<br>
+<hr>
+<br>
 
-// 두가지 Context 들의 Provider 로 감싸주는 컴포넌트입니다. 
-// 최상위 컴포넌트 app.js에서 사용했습니다. 
-export function IssuesProvider({ children }) {
-  const [state, dispatch] = useReducer(issuesReducer, initialState);
-  return (
-    <IssuesStateContext.Provider value={state}>
-      <IssuesDispatchContext.Provider value={dispatch}>{children}</IssuesDispatchContext.Provider>
-    </IssuesStateContext.Provider>
-  );
-}
 
-// State 를 쉽게 조회 할 수 있게 해주는 커스텀 Hook입니다. 
-export function useIssuesState() {
-  const state = useContext(IssuesStateContext);
-  if (!state) {
-    throw new Error('Cannot find issuesProvider');
-  }
-  return state;
-}
+## Assignment4. Context API를 활용한 API 연동
 
-// Dispatch 를 쉽게 사용 할 수 있게 해주는 커스텀 Hook입니다. 
-export function useIssuesDispatch() {
-  const dispatch = useContext(IssuesDispatchContext);
-  if (!dispatch) {
-    throw new Error('Cannot find issuesProvider');
-  }
-  return dispatch;
-}
-```
+- 전체적으로 Reducer를 활용하여 진행하였습니다.
+
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/context/contextState.js#L1-L23
+
+<br>
+<hr>
+<br>
+
+- state 상태값에 따라 상태값을 관리해줍니다. 
+
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/lib/useReducer.js#L3-L43
+
+<br>
+<hr>
+<br>
+
+- context API에서 dispatch와 state 조회를 쉽게 해주는 custom hook을 만들었습니다. 
+
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/context/IssuesContext.js#L18-L48
+
+<br>
+<hr>
+<br>
+
+- 함수를 통해 axios 비동기 통신으로 깃허브 이슈리스트를 받아와서 context 에서 관리하는 함수입니다.  
 
 ```javascript
 // 이슈 목록 가져오는 함수
@@ -369,23 +277,19 @@ function getIssue(dispatch, issue_number) {
   }
 }
 ```
-함수를 통해 axios 비동기 통신으로 깃허브 이슈리스트를 받아와서 context 에서 관리하는 함수입니다.  
+
+<br>
+<hr>
+<br>
 
 
-## Assignment3. 데이터 요청 중 로딩 표시
+## Assignment4. 데이터 요청 중 로딩 표시
 
-로딩 컴포넌트를 제작하였습니다. 
+- 로딩 컴포넌트를 제작하였습니다. 
 
-```javascript
-export default () => {
-  return (
-    <Background>
-      <LoadingText>잠시만 기다려 주세요.</LoadingText>
-      <SpinnerImg src={Spinner} alt="로딩중" width="5%" />
-    </Background>
-  );
-};
-```
+
+https://github.com/crystal993/Github_Issue_Viewer/blob/0467af8ee4e90dbb5752539273c58fe4c84aa044/src/components/elements/Loading.jsx#L2-L13
+
 ```javascript
 // context에서 전역 관리하는 loading 상태값을 가져온다. 
  const { data: issues, loading, error } = state.issues;
@@ -408,10 +312,15 @@ export default () => {
               return <>{issue && <Issue issue={issue} key={issue.id} />}</>;
 ...
 ```
+
+<br>
+<hr>
+<br>
 
 
 ## Assignment4. 에러 화면 구현
 error가 있을경우 ErrorPage를 보여주도록 하였습니다.
+
 ```javascript
 // context에서 전역 관리하는 loading 상태값을 가져온다. 
  const { data: issues, loading, error } = state.issues;
@@ -435,6 +344,10 @@ error가 있을경우 ErrorPage를 보여주도록 하였습니다.
 ...
 ```
 
+
+<br>
+<hr>
+<br>
 
 ## Assignment5. 반응형 화면 
 - 모든 화면을 반응형 템플릿에 맞게 제작했습니다. 
@@ -458,6 +371,10 @@ error가 있을경우 ErrorPage를 보여주도록 하였습니다.
     width: 25rem;
   }
 ```
+
+<br>
+<hr>
+<br>
 
 
 ### 그 외 기능(옵션)
