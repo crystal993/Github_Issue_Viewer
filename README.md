@@ -1,8 +1,26 @@
-# 프리온보딩 9팀
+## 👨‍👩‍👧‍👦 9팀
 
-## **배포링크**
+## **✨ 배포링크**
 
-[✨ 배포링크](https://github-issue-viewer-erjw.vercel.app/)
+[✨ 깃허브 Angular issue Viewer](https://github-issue-viewer-erjw.vercel.app/)
+
+<br>
+
+## 📝 Description 
+
+원티드 프리온보딩에서 진행하는
+특정 깃헙 레파지토리의 이슈 목록과 상세 내용을 확인하는 
+웹사이트를 구축하는 과제입니다. 
+
+<br>
+
+
+## 🛠️ Dev Tools
+
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
+  <img src="https://img.shields.io/badge/styled_components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+
+  <br>
 
 ## **프로젝트의 실행 방법**
 
@@ -16,29 +34,47 @@ npm start
 open http://localhost:3000
 ```
 
-## **디렉토리 구조**
+<br>
+
+## **📝 디렉토리 구조**
 ```sh
-├── public
-├── src
-│   ├── api             # axios 등의 호출을 위한 함수들
-│   ├── assets          # 이미지 파일 폴더
-│   ├── components      # 하위 컴포넌트들
-│   │   ├── detail        # detail 페이지에 쓰이는 컴포넌트
-│   │   └── elements      # 재사용성이 높은 공통 컴포넌트
-│   │   └── main          # main 페이지에 쓰이는 컴포넌트
-│   ├── context        # context API의 provider 모음
-│   ├── lib             # context reducers
-│   ├── pages           # 페이지 컨테이너
-│   ├── router          # 페이지 라우팅을 위한 라우터
-│   ├── styles          # 공통 style을 위한 폴더
-│   └── utils           # 재사용성이 높은 각종 함수들
-├── App.js
-└── index.js
+├──📂 public
+├──📂 src
+│   ├──📂 api             # axios 등의 호출을 위한 함수들
+│   ├──📂 assets          # 이미지 파일 폴더
+│   ├──📂 components      # 하위 컴포넌트들
+│   │   ├──📂 detail        # detail 페이지에 쓰이는 컴포넌트
+│   │   └──📂 elements      # 재사용성이 높은 공통 컴포넌트
+│   │   └──📂 main          # main 페이지에 쓰이는 컴포넌트
+│   ├──📂 context        # context API의 provider 모음
+│   ├──📂 lib             # context reducers
+│   ├──📂 pages           # 페이지 컨테이너
+│   ├──📂 router          # 페이지 라우팅을 위한 라우터
+│   ├──📂 styles          # 공통 style을 위한 폴더
+│   └──📂 utils           # 재사용성이 높은 각종 함수들
+├──📄 App.js
+└──📄 index.js
 ```  
 
-## **commit msg 규칙**
+<br>
 
-### 1. 커밋 유형 지정하기
+## 📝 API 보러가기 
+
+### [Github Rest API](https://docs.github.com/en/rest)
+
+- GitHub REST API 로 개발을 진행했습니다. 
+- token을 발급하지 않으면 시간 당 60회로 API 호출 횟수 제한 되기 때문에
+  개발 시에는 access token을 발급받아 60회 제한 없이 개발을 진행했습니다. 
+
+<br>
+
+## 🔒 팀 규칙
+
+<details>
+<summary>커밋 규칙</summary>
+<div markdown="1">
+
+## **commit message 규칙**
 
 ⭐ feat : 새로운 기능에 대한 커밋
 
@@ -56,8 +92,20 @@ open http://localhost:3000
 
 💡 ci : CI관련 설정 수정에 대한 커밋
 
+🚫 제목 끝에 마침표 금지
+⚠ 무엇을 했는지 명확하게 작성
+
+</div>
+</details>
+
+
+<details>
+<summary>코딩 컨벤션 규칙</summary>
+<div markdown="1">
+
 ## **코딩 컨벤션**
-- 컴포넌트의 ID사용은 지양한다.  
+
+- 컴포넌트의 ID사용은 지양한다.
 - react의 state는 여러개 사용시 최소 집합을 찾아 사용한다.
 - 컴포넌트의 이벤트에서 불필요한 익명함수를 사용하지 않는다. (예시: 함수의 인자가 event 하나인 경우)
 - 코드를 설명하는 주석은 가급적 사용하지 않는다.
@@ -68,7 +116,12 @@ open http://localhost:3000
 - 이벤트 핸들러는 'on'으로 시작한다.
 - 한 줄짜리 블록일 경우라도 {}를 생략하지 않으며 명확히 줄 바꿈 하여 사용한다.
 
+</div>
+</details>
 
+<details>
+<summary>Lint, Formatter 규칙</summary>
+<div markdown="1">
 
 ## 작업한 내용
 
