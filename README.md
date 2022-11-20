@@ -119,9 +119,6 @@ open http://localhost:3000
 </div>
 </details>
 
-<details>
-<summary>Lint, Formatter 규칙</summary>
-<div markdown="1">
 
 ## 작업한 내용
 
