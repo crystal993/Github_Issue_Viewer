@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useContext } from 'react';
 import { apis } from '../api/api';
-import { errors, loadingState, success } from './contextState';
+import { detailSuccess, errors, loadingState } from './contextState';
 
 const initialState = {
   bodyTxt: {
@@ -20,7 +20,7 @@ function markdownReducer(state, action) {
     case 'POST_BODYTXT_SUCCESS':
       return {
         ...state,
-        bodyTxt: success(action.data),
+        bodyTxt: detailSuccess(action.data),
       };
     case 'POST_BODYTXT_ERROR':
       return {

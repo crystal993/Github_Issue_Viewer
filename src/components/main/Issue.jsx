@@ -21,18 +21,21 @@ const Issue = ({ issue }) => {
 };
 
 const Wrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
   text-overflow: ellipsis;
   padding: 0.1rem;
   border-bottom: 1px solid ${({ theme }) => theme.gray};
   cursor: pointer;
+  padding: 0.5rem 1rem;
 `;
 
 const ContentsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   padding: 0.5rem;
   padding-bottom: 0.6rem;
   @media (min-width: 1280px) {
@@ -41,11 +44,15 @@ const ContentsWrapper = styled.div`
   }
   @media (min-width: 768px) and (max-width: 1280px) {
     /* Tablet */
-    width: 31rem;
+    width: 38rem;
   }
-  @media (max-width: 767px) {
+  @media (min-width: 320px) and (max-width: 767px) {
     /* Mobile */
-    width: 34rem;
+    width: 23rem;
+  }
+  @media (max-width: 320px) {
+    /* Mobile */
+    width: 18rem;
   }
 `;
 

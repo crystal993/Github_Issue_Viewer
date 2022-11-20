@@ -13,12 +13,14 @@ export default () => {
 };
 
 const Background = styled.div`
+  width: 100%;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 1.4rem;
-  margin: 1rem;
+  margin: 1rem auto;
 `;
 const LoadingText = styled.div`
   color: white;

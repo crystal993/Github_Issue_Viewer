@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { getIssue, useIssuesDispatch, useIssuesState } from '../../context/IssuesContext';
 import { getCurDate } from '../../utils/date';
+import Loading from '../elements/Loading';
 import IssueBody from './IssueBody';
 
 const IssueDetail = () => {
@@ -17,7 +18,12 @@ const IssueDetail = () => {
     return () => {};
   }, []);
 
-  if (loading) return <div>로딩중..</div>;
+  if (loading)
+    return (
+      <>
+        <Loading />
+      </>
+    );
   else if (error) return <div>에러가 발생했습니다</div>;
   else if (issue)
     return (
@@ -47,7 +53,7 @@ const Wrapper = styled.div`
   margin: 0 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   min-height: 45rem;
   @media (min-width: 1280px) {
@@ -58,9 +64,14 @@ const Wrapper = styled.div`
     /* Tablet */
     width: 50rem;
   }
-  @media (max-width: 767px) {
+  @media (min-width: 320px) and (max-width: 767px) {
     /* Mobile */
-    width: 45rem;
+    margin-right: 0.8rem;
+    width: 35rem;
+  }
+  @media (max-width: 320px) {
+    /* Mobile */
+    width: 25rem;
   }
 `;
 
@@ -80,7 +91,7 @@ const ContentsWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 1.5rem 0.5rem 0rem 0.5rem;
+  padding: 1.5rem 1rem 0rem 0.5rem;
   width: 100%;
 `;
 

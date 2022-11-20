@@ -1,12 +1,18 @@
 export const loadingState = {
   loading: true,
-  data: null,
+  data: [],
   error: null,
 };
 
-export const success = data => ({
+export const detailSuccess = data => ({
   loading: false,
   data,
+  error: null,
+});
+
+export const mainSuccess = data => ({
+  loading: false,
+  data: data,
   error: null,
 });
 

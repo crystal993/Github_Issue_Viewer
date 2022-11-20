@@ -1,56 +1,19 @@
 import React, { createContext, useReducer, useContext } from 'react';
 import { apis } from '../api/api';
-import { errors, loadingState, success } from './contextState';
+import issuesReducer from '../lib/useReducer';
 
 const initialState = {
   issues: {
-    loading: false,
-    data: null,
+    loading: true,
+    data: [],
     error: null,
   },
   issue: {
-    loading: false,
+    loading: true,
     data: null,
     error: null,
   },
 };
-
-function issuesReducer(state, action) {
-  switch (action.type) {
-    case 'GET_ISSUES':
-      return {
-        ...state,
-        issues: loadingState,
-      };
-    case 'GET_ISSUES_SUCCESS':
-      return {
-        ...state,
-        issues: success(action.data),
-      };
-    case 'GET_ISSUES_ERROR':
-      return {
-        ...state,
-        issues: errors(action.error),
-      };
-    case 'GET_ISSUE':
-      return {
-        ...state,
-        issue: loadingState,
-      };
-    case 'GET_ISSUE_SUCCESS':
-      return {
-        ...state,
-        issue: success(action.data),
-      };
-    case 'GET_ISSUE_ERROR':
-      return {
-        ...state,
-        issue: errors(action.error),
-      };
-    default:
-      throw new Error(`Unhanded action type: ${action.type}`);
-  }
-}
 
 const IssuesStateContext = createContext(null);
 const IssuesDispatchContext = createContext(null);
@@ -84,11 +47,13 @@ export function useIssuesDispatch() {
   return dispatch;
 }
 
-export async function getIssues(dispatch) {
-  dispatch({ type: 'GET_ISSUES' });
+export async function getIssues(dispatch, page) {
+  if (page <= 1) {
+    dispatch({ type: 'GET_ISSUES' });
+  }
   try {
-    const response = await apis.get_issues();
-    dispatch({ type: 'GET_ISSUES_SUCCESS', data: response.data });
+    const response = await apis.get_issues(page);
+    dispatch({ type: 'GET_ISSUES_SUCCESS', data: response.data, page });
   } catch (e) {
     dispatch({ type: 'GET_ISSUES_ERROR', error: e });
   }
