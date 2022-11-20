@@ -28,3 +28,4 @@ const ErrorImg = styled.img`
 `;
 
 export default NotFound;
+
