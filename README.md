@@ -3,7 +3,6 @@
 ## **✨ 배포링크**
 
 [✨ 깃허브 Angular issue Viewer](https://github-issue-viewer-erjw.vercel.app/)
-22.11.29 깃허브 개인 토큰이 만료되서 현재는 데이터가 보이지 않는 상태입니다. 
 <br>
 
 ## 📝 Description 
